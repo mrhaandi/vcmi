@@ -140,6 +140,18 @@
             }
         },
         {
+            "name": "windows-clang-debug",
+            "displayName": "Windows x64 Clang (Debug)",
+            "description": "VCMI Windows Ninja using Clang (Debug)",
+            "inherits": "default-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "ENABLE_CCACHE": "ON"
+            }
+        },
+        {
             "name": "windows-mingw-release",
             "displayName": "Windows x64 MinGW Release",
             "description": "VCMI Windows Ninja using MinGW",
@@ -430,6 +442,11 @@
             "name": "macos-arm-conan-ninja-release",
             "configurePreset": "macos-arm-conan-ninja-release",
             "inherits": "default-release"
+        },
+        {
+            "name": "windows-clang-debug",
+            "configurePreset": "windows-clang-debug",
+            "inherits": "default-debug"
         },
         {
             "name": "windows-mingw-release",
