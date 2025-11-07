@@ -112,7 +112,15 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv
 4. Install dependencies
    - For MinGW64 (MSVCRT): `pacman -S mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_image mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_ttf mingw-w64-x86_64-boost mingw-w64-x86_64-gcc mingw-w64-x86_64-ninja mingw-w64-x86_64-qt5-static mingw-w64-x86_64-qt5-tools mingw-w64-x86_64-tbb`
    - For UCRT64: `pacman -S --needed mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-ninja mingw-w64-ucrt-x86_64-boost mingw-w64-ucrt-x86_64-minizip mingw-w64-ucrt-x86_64-ffmpeg mingw-w64-ucrt-x86_64-SDL2_image mingw-w64-ucrt-x86_64-SDL2_mixer mingw-w64-ucrt-x86_64-SDL2_ttf mingw-w64-ucrt-x86_64-qt5-static mingw-w64-ucrt-x86_64-tbb`
-5. Generate and build solution from VCMI-root dir: `cmake --preset windows-mingw-release && cmake --build --preset windows-mingw-release`
+   - For CLANG64: `pacman -S --needed mingw-w64-clang-x86_64-cmake mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-ninja mingw-w64-clang-x86_64-boost mingw-w64-clang-x86_64-minizip mingw-w64-clang-x86_64-ffmpeg mingw-w64-clang-x86_64-SDL2_image mingw-w64-clang-x86_64-SDL2_mixer mingw-w64-clang-x86_64-SDL2_ttf mingw-w64-clang-x86_64-qt5-static mingw-w64-clang-x86_64-tbb`
+5. Generate and build solution from VCMI-root dir:
+   - For MinGW64 or UCRT64: `cmake --preset windows-mingw-release && cmake --build --preset windows-mingw-release`
+   - For CLANG64: `cmake --preset windows-clang-debug && cmake --build --preset windows-clang-debug`
+
+For Debugging:
+- Add `export PATH="/c/Program Files/Microsoft VS Code/bin:$PATH"` to `.bashrc` (now `code .` works in clang console)
+- `pacman -S --needed mingw-w64-ucrt-x86_64-gdb`
+- add the `C/C++` and `CMake Tools` extensions in VSCode
 
 **NOTE:** This will link Qt5 statically to `VCMI_launcher.exe` and `VCMI_Mapeditor.exe`. See [PR #3421](https://github.com/vcmi/vcmi/pull/3421) for some background.
 
