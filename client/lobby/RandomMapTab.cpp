@@ -360,14 +360,31 @@ void RandomMapTab::setMapGenOptions(std::shared_ptr<CMapGenOptions> opts)
 	}
 	if(auto w = widget<CToggleButton>("buttonTwoLevels"))
 	{
-		int possibleLevelCount = 2;
 		if(mapGenOptions->getMapTemplate())
 		{
 			auto sizes = mapGenOptions->getMapTemplate()->getMapSizes();
-			possibleLevelCount = sizes.second.z - sizes.first.z + 1;
+			if(sizes.second.z == sizes.first.z) //no choice
+			{
+				opts->setLevels(sizes.first.z);
+				if (sizes.first.z == 1) //no underground
+				{
+					w->setSelected(false);
+					w->block(true);
+				}
+				else //forced underground
+				{
+					w->setSelected(true);
+					w->setAllowDeselection(false);
+				}
+			}
+			else //both levels available
+			{
+				w->setSelected(opts->getLevels() == 2);
+				w->setAllowDeselection(true);
+			}
 		}
-		w->setSelected(opts->getLevels() == 2); // TODO: multilevel support
-		w->block(possibleLevelCount < 2);
+		else
+			w->setSelected(opts->getLevels() == 2);
 	}
 	if(auto w = widget<CToggleGroup>("groupMaxPlayers"))
 	{
