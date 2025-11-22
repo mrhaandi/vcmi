@@ -180,6 +180,26 @@ void ExecuteHeroChain::accept(AIGateway * aiGw)
 					}
 				}
 
+				auto findWhirlpool = [&aiGw](const int3 & pos) -> const CGObjectInstance*
+				{
+					auto objs = aiGw->cc->getVisitableObjs(pos);
+					auto whirlpool = std::find_if(objs.begin(), objs.end(), [](const CGObjectInstance * o)->bool
+						{
+							return o->ID == Obj::WHIRLPOOL;
+						});
+
+					return whirlpool != objs.end() ? *whirlpool : nullptr;
+				};
+
+				auto sourceWhirlpool = findWhirlpool(hero->visitablePos());
+				auto targetWhirlpool = findWhirlpool(node->coord);
+			
+				if (sourceWhirlpool && targetWhirlpool && sourceWhirlpool != targetWhirlpool)
+				{
+					//ai expected to arrive at a different whirlpool
+					aiGw->cc->teleportHero(hero, targetWhirlpool, 2);
+				}
+
 				if(node->turns == 0 && node->coord != hero->visitablePos())
 				{
 					auto targetNode = aiGw->nullkiller->getPathsInfo(hero)->getPathInfo(node->coord);
@@ -198,25 +218,11 @@ void ExecuteHeroChain::accept(AIGateway * aiGw)
 					}
 				}
 
-				auto findWhirlpool = [&aiGw](const int3 & pos) -> ObjectInstanceID
-				{
-					auto objs = aiGw->cc->getVisitableObjs(pos);
-					auto whirlpool = std::find_if(objs.begin(), objs.end(), [](const CGObjectInstance * o)->bool
-						{
-							return o->ID == Obj::WHIRLPOOL;
-						});
-
-					return whirlpool != objs.end() ? dynamic_cast<const CGWhirlpool *>(*whirlpool)->id : ObjectInstanceID(-1);
-				};
-
-				auto sourceWhirlpool = findWhirlpool(hero->visitablePos());
-				auto targetWhirlpool = findWhirlpool(node->coord);
-				
-				if(i != chainPath.nodes.size() - 1 && sourceWhirlpool.hasValue() && sourceWhirlpool == targetWhirlpool)
-				{
-					logAi->trace("AI exited whirlpool at %s but expected at %s", hero->visitablePos().toString(), node->coord.toString());
-					continue;
-				}
+				//if(i != chainPath.nodes.size() - 1 && sourceWhirlpool.hasValue() && sourceWhirlpool == targetWhirlpool)
+				//{
+				//	logAi->trace("AI exited whirlpool at %s but expected at %s", hero->visitablePos().toString(), node->coord.toString());
+				//	continue;
+				//}
 
 				if(hero->movementPointsRemaining())
 				{

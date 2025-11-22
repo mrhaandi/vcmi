@@ -42,7 +42,8 @@ public:
 //commands
 	void moveHero(const CGHeroInstance *h, const std::vector<int3> & path, bool transit) override;
 	void moveHero(const CGHeroInstance *h, const int3 & destination, bool transit) override;
-	bool teleportHero(const CGHeroInstance *who, const CGTownInstance *where);
+	//teleport between towns, whirlpools, and ramdom two-way teleports
+	bool teleportHero(const CGHeroInstance *who, const CGObjectInstance *where, ui8 source = 1);
 	int selectionMade(int selection, QueryID queryID) override;
 	int sendQueryReply(std::optional<int32_t> reply, QueryID queryID) override;
 	int swapCreatures(const CArmedInstance *s1, const CArmedInstance *s2, SlotID p1, SlotID p2) override;

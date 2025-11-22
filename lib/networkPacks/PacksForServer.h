@@ -101,6 +101,7 @@ struct DLL_LINKAGE CastleTeleportHero : public CPackForServer
 		h & static_cast<CPackForServer &>(*this);
 		h & dest;
 		h & hid;
+		h & source;
 	}
 };
 

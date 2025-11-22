@@ -1071,6 +1071,19 @@ bool CGameHandler::moveHero(ObjectInstanceID hid, int3 dst, EMovementMode moveme
 bool CGameHandler::teleportHero(ObjectInstanceID hid, ObjectInstanceID dstid, ui8 source, PlayerColor asker)
 {
 	const CGHeroInstance *h = gameInfo().getHero(hid);
+
+	//teleportation between whirlpools
+	if (source == 2)
+	{
+		const CGWhirlpool *w = dynamic_cast<const CGWhirlpool *>(gameInfo().getObj(dstid));
+		
+		if (!h || !w)
+			COMPLAIN_RET("Invalid call to teleportHero!");
+		int3 pos = h->convertFromVisitablePos(w->visitablePos());
+		moveHero(hid, pos, EMovementMode::MONOLITH);
+		return true;
+	}
+	//teleportation between towns
 	const CGTownInstance *t = gameInfo().getTown(dstid);
 
 	if (!h || !t)

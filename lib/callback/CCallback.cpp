@@ -21,9 +21,9 @@
 
 VCMI_LIB_NAMESPACE_BEGIN
 
-bool CCallback::teleportHero(const CGHeroInstance *who, const CGTownInstance *where)
+bool CCallback::teleportHero(const CGHeroInstance *who, const CGObjectInstance *where, ui8 source)
 {
-	CastleTeleportHero pack(who->id, where->id, 1);
+	CastleTeleportHero pack(who->id, where->id, source);
 	sendRequest(pack);
 	return true;
 }

@@ -78,6 +78,7 @@ void Nullkiller::init(const std::shared_ptr<CCallback> & cbInput, AIGateway * ai
 
 	PathfinderOptions pathfinderOptions(*cc);
 	pathfinderOptions.useTeleportTwoWay = true;
+	pathfinderOptions.forceUseTeleportWhirlpool = true;
 	pathfinderOptions.useTeleportOneWay = settings->isOneWayMonolithUsageAllowed();
 	pathfinderOptions.useTeleportOneWayRandom = settings->isOneWayMonolithUsageAllowed();
 
@@ -272,6 +273,11 @@ void Nullkiller::updateState()
 
 		makingTurnInterruption.interruptionPoint();
 		heroManager->update();
+		for (auto hero : cc->getHeroesInfo())
+		{
+			auto targetNode = getPathsInfo(hero)->getPathInfo(int3(54, 69,0));
+			targetNode = targetNode;
+		}
 		logAi->trace("Updating paths");
 
 		PathfinderSettings cfg;
@@ -291,6 +297,12 @@ void Nullkiller::updateState()
 		makingTurnInterruption.interruptionPoint();
 		const auto heroes = getHeroesForPathfinding();
 		pathfinder->updatePaths(heroes, cfg);
+
+		for (auto hero : cc->getHeroesInfo())
+		{
+			auto targetNode = pathfinder->getPathInfo(int3(54, 69,0));
+			targetNode = targetNode;
+		}
 
 		if(isObjectGraphAllowed())
 		{
@@ -369,10 +381,10 @@ void Nullkiller::makeTurn()
 
 		tasks.clear();
 		decompose(tasks, sptr(CaptureObjectsBehavior()), 1);
-		decompose(tasks, sptr(ClusterBehavior()), MAX_DEPTH);
-		decompose(tasks, sptr(DefenceBehavior()), MAX_DEPTH);
-		decompose(tasks, sptr(GatherArmyBehavior()), MAX_DEPTH);
-		decompose(tasks, sptr(StayAtTownBehavior()), MAX_DEPTH);
+		//decompose(tasks, sptr(ClusterBehavior()), MAX_DEPTH);
+		//decompose(tasks, sptr(DefenceBehavior()), MAX_DEPTH);
+		//decompose(tasks, sptr(GatherArmyBehavior()), MAX_DEPTH);
+		//decompose(tasks, sptr(StayAtTownBehavior()), MAX_DEPTH);
 
 		if(!isOpenMap())
 			decompose(tasks, sptr(ExplorationBehavior()), MAX_DEPTH);
