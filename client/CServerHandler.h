@@ -208,6 +208,7 @@ public:
 	void debugStartTest(std::string filename, bool save = false);
 
 	void startGameplay(std::shared_ptr<CGameState> gameState);
+	void quickLoadGame();
 	void showHighScoresAndEndGameplay(PlayerColor player, bool victory, const StatisticDataSet & statistic);
 	void endNetwork();
 	void endGameplay();

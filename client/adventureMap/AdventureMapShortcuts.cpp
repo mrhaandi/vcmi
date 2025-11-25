@@ -97,6 +97,8 @@ std::vector<AdventureMapShortcutState> AdventureMapShortcuts::getShortcuts()
 		{ EShortcut::ADVENTURE_SAVE_GAME,        optionInMapView(),      [this]() { this->saveGame(); } },
 		{ EShortcut::ADVENTURE_NEW_GAME,         optionInMapView(),      [this]() { this->newGame(); } },
 		{ EShortcut::ADVENTURE_LOAD_GAME,        optionInMapView(),      [this]() { this->loadGame(); } },
+		{ EShortcut::ADVENTURE_QUICK_SAVE,       optionInMapView(),      [this]() { this->quickSaveGame(); } },
+		{ EShortcut::ADVENTURE_QUICK_LOAD,       optionInMapView(),      [this]() { this->quickLoadGame(); } },
 		{ EShortcut::ADVENTURE_RESTART_GAME,     optionInMapView(),      [this]() { this->restartGame(); } },
 		{ EShortcut::ADVENTURE_DIG_GRAIL,        optionHeroDig(),        [this]() { this->digGrail(); } },
 		{ EShortcut::ADVENTURE_VIEW_PUZZLE,      optionSidePanelActive(),[this]() { this->viewPuzzleMap(); } },
@@ -372,6 +374,19 @@ void AdventureMapShortcuts::saveGame()
 void AdventureMapShortcuts::loadGame()
 {
 	GAME->interface()->proposeLoadingGame();
+}
+
+void AdventureMapShortcuts::quickSaveGame()
+{
+	std::string path = "Saves/Quicksave";
+	GAME->interface()->cb->save(path);
+}
+
+void AdventureMapShortcuts::quickLoadGame()
+{
+	//std::string path = "Saves/Quicksave";
+	//GAME->interface()->cb->quickLoad(path);
+	GAME->server().quickLoadGame();
 }
 
 void AdventureMapShortcuts::digGrail()

@@ -691,6 +691,13 @@ void CServerHandler::endGameplay()
 	}
 }
 
+void CServerHandler::quickLoadGame()
+{
+	LobbyQuickLoadGame pack;
+	pack.saveFilePath = "Saves/Quicksave";
+	sendLobbyPack(pack);
+}
+
 void CServerHandler::restartGameplay()
 {
 	client->finishGameplay();

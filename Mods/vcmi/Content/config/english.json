@@ -342,6 +342,8 @@
 	"vcmi.keyBindings.keyBinding.adventureReplayTurn": "Adventure replay turn",
 	"vcmi.keyBindings.keyBinding.adventureRestartGame": "Adventure restart game",
 	"vcmi.keyBindings.keyBinding.adventureSaveGame": "Adventure save game",
+	"vcmi.keyBindings.keyBinding.adventureQuickSave": "Adventure quick save",
+	"vcmi.keyBindings.keyBinding.adventureQuickLoad": "Adventure quick load",
 	"vcmi.keyBindings.keyBinding.adventureSetHeroAsleep": "Adventure set hero asleep",
 	"vcmi.keyBindings.keyBinding.adventureSetHeroAwake": "Adventure set hero awake",
 	"vcmi.keyBindings.keyBinding.adventureThievesGuild": "Adventure thieves guild",

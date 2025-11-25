@@ -41,6 +41,11 @@ void ApplyOnServerAfterAnnounceNetPackVisitor::visitForLobby(CPackForLobby & pac
 	}
 }
 
+void ClientPermissionsCheckerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
+{
+	result = srv.isClientHost(connection->connectionID);
+}
+
 void ClientPermissionsCheckerNetPackVisitor::visitLobbyClientConnected(LobbyClientConnected & pack)
 {
 	result = srv.getState() == EServerState::LOBBY;
@@ -108,6 +113,38 @@ void ApplyOnServerAfterAnnounceNetPackVisitor::visitLobbyClientDisconnected(Lobb
 void ClientPermissionsCheckerNetPackVisitor::visitLobbyChatMessage(LobbyChatMessage & pack)
 {
 	result = true;
+}
+
+void ApplyOnServerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
+{
+	// modify StartInfo to load the quicksave
+
+	auto backupMode = srv.si->mode;
+	auto backupMapname = srv.si->mapname;
+
+	srv.si->mode = EStartMode::LOAD_GAME;
+	srv.si->mapname = pack.saveFilePath;
+
+	// prepare game state (loads the save file)
+	if (!srv.prepareToStartGame()) {
+		result = false;
+		srv.si->mode = backupMode;
+		srv.si->mapname = backupMapname;
+		//TODO on failure this is so destructive, that an exception is the only way?
+		return;
+	}
+
+	// create LobbyStartGame packet with loaded state and announce to all clients
+	LobbyStartGame startPack;
+	startPack.initializedStartInfo = std::make_shared<StartInfo>(*srv.gh->gameState().getInitialStartInfo());
+	startPack.initializedGameState = srv.gh->gs;
+	srv.announcePack(startPack);
+	result = true;
+}
+
+void ApplyOnServerAfterAnnounceNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
+{
+	//srv.startGameImmediately();
 }
 
 void ApplyOnServerNetPackVisitor::visitLobbySetMap(LobbySetMap & pack)

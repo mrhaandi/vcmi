@@ -67,6 +67,8 @@ class AdventureMapShortcuts
 	void quitGame();
 	void saveGame();
 	void loadGame();
+	void quickSaveGame();
+	void quickLoadGame();
 	void digGrail();
 	void viewPuzzleMap();
 	void restartGame();
