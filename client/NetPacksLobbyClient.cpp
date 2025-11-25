@@ -44,6 +44,12 @@
 void ApplyOnLobbyHandlerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
 {
 	assert(handler.getState() == EClientState::GAMEPLAY);
+	if(auto w = ENGINE->windows().topWindow<CLoadingScreen>())
+	{
+		w->finish();
+		w->tick(0);
+		w->redraw();
+	}
 }
 
 void ApplyOnLobbyHandlerNetPackVisitor::visitLobbyClientConnected(LobbyClientConnected & pack)

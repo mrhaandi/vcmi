@@ -693,6 +693,13 @@ void CServerHandler::endGameplay()
 
 void CServerHandler::quickLoadGame()
 {
+	if(!settings["session"]["headless"].Bool())
+	{
+		if(si->campState && !si->campState->getLoadingBackground().empty())
+			ENGINE->windows().createAndPushWindow<CLoadingScreen>(si->campState->getLoadingBackground());
+		else
+			ENGINE->windows().createAndPushWindow<CLoadingScreen>();
+	}
 	LobbyQuickLoadGame pack;
 	pack.saveFilePath = "Saves/Quicksave";
 	sendLobbyPack(pack);
