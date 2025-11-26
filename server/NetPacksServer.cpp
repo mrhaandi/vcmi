@@ -29,6 +29,12 @@
 
 void ApplyGhNetPackVisitor::visitSaveGame(SaveGame & pack)
 {
+	if (!gh.queries->allQueries().empty())
+	{
+		logGlobal->error("Cannot save game while queries are pending");
+		result = false;
+		return;
+	}
 	gh.save(pack.fname);
 	logGlobal->info("Game has been saved as %s", pack.fname);
 	result = true;

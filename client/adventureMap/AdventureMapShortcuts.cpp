@@ -387,15 +387,13 @@ void AdventureMapShortcuts::quickSaveGame()
 
 void AdventureMapShortcuts::quickLoadGame()
 {
-	auto onYes = [this]() -> void
+	auto onYes = []() -> void
 	{
 		std::string path = "Saves/Quicksave";
 		GAME->server().quickLoadGame(path);
 	};
 
-	//std::string confirmText = LIBRARY->generaltexth->allTexts[TODO];
-	std::string confirmText = "Are you sure you want to load the quicksave?";
-	GAME->interface()->showYesNoDialog(confirmText, onYes, nullptr);
+	GAME->interface()->showYesNoDialog(LIBRARY->generaltexth->translate("vcmi.adventureMap.confirmQuickLoadGame"), onYes, nullptr);
 }
 
 void AdventureMapShortcuts::digGrail()
