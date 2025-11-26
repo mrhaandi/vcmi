@@ -27,6 +27,8 @@
 	"vcmi.adventureMap.moveCostDetailsNoTurns"           : "Движение сюда будет стоить {%POINTS} очков. {%REMAINING} очков останется после движения.",
 	"vcmi.adventureMap.movementPointsHeroInfo"           : "(Очки движения: %REMAINING / %POINTS)",
 	"vcmi.adventureMap.replayOpponentTurnNotImplemented" : "Извините, повторение хода соперника еще не реализовано!",
+	"vcmi.adventureMap.confirmQuickLoadGame"             : "Вы уверены, что хотите загрузить быстрый сохраненный файл?",
+
 	"vcmi.bonusSource.artifact" : "Артефакт",
 	"vcmi.bonusSource.creature" : "Умение",
 	"vcmi.bonusSource.spell" : "Заклинание",
