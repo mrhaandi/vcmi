@@ -240,19 +240,23 @@
 				{
 					"type": "adventureMapButton",
 					"name": "buttonQuickSave",
-					"image" : "IAM009.DEF",
+					"image" : "buttons/iam-quicksave.def",
 					"hotkey": "adventureQuickSave",
 					"help" : "core.help.302",
 					"playerColored" : true,
+          "generateFromBaseImage" : "radialMenu/iam-quicksave",
+					"generateSmall" : true,
 					"area": { "top" : 128, "left": 0, "width" : 32, "height" : 32 }
 				},
 				{
 					"type": "adventureMapButton",
 					"name": "buttonQuickLoad",
-					"image" : "IAM009.DEF",
+					"image" : "buttons/iam-quickload.def",
 					"hotkey": "adventureQuickLoad",
 					"help" : "core.help.302",
 					"playerColored" : true,
+          "generateFromBaseImage" : "radialMenu/iam-quickload",
+					"generateSmall" : true,
 					"area": { "top" : 128, "left": 32, "width" : 32, "height" : 32 }
 				},
 				{
