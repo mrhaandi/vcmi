@@ -721,7 +721,7 @@ bool AdventureMapShortcuts::optionIsLocal()
 	
 	//exclude local multiplayer games (hot seat is ok)
 	auto hostClientId = GAME->server().hostClientId;
-	for(const auto playerName : GAME->server().playerNames)
+	for(const auto& playerName : GAME->server().playerNames)
 	{
 		if(playerName.second.connection != hostClientId)
 			return false;
