@@ -107,6 +107,7 @@ public:
 	bool optionHeroBoat(EPathfindingLayer layer);
 	bool optionHeroDig();
 	bool optionViewStatistic();
+	bool optionIsLocal();
 
 	void setState(EAdventureState newState);
 	EAdventureState getState() const;

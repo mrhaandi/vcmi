@@ -43,6 +43,7 @@ void ApplyOnServerAfterAnnounceNetPackVisitor::visitForLobby(CPackForLobby & pac
 
 void ClientPermissionsCheckerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
 {
+	// only host can load quicksave
 	result = srv.isClientHost(connection->connectionID);
 }
 
@@ -118,20 +119,13 @@ void ClientPermissionsCheckerNetPackVisitor::visitLobbyChatMessage(LobbyChatMess
 void ApplyOnServerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
 {
 	// modify StartInfo to load the quicksave
-
-	auto backupMode = srv.si->mode;
-	auto backupMapname = srv.si->mapname;
-
 	srv.si->mode = EStartMode::LOAD_GAME;
 	srv.si->mapname = pack.saveFilePath;
 
 	// prepare game state (loads the save file)
 	if (!srv.prepareToStartGame()) {
-		result = false;
-		srv.si->mode = backupMode;
-		srv.si->mapname = backupMapname;
-		//TODO on failure this is so destructive, that an exception is the only way?
-		return;
+		//failure is destructive and an exception is the only way
+		throw std::runtime_error("Failed to prepare to start game during quick load.");
 	}
 
 	// create LobbyStartGame packet with loaded state and announce to all clients
@@ -144,7 +138,6 @@ void ApplyOnServerNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & p
 
 void ApplyOnServerAfterAnnounceNetPackVisitor::visitLobbyQuickLoadGame(LobbyQuickLoadGame & pack)
 {
-	//srv.startGameImmediately();
 }
 
 void ApplyOnServerNetPackVisitor::visitLobbySetMap(LobbySetMap & pack)
