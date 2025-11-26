@@ -691,7 +691,7 @@ void CServerHandler::endGameplay()
 	}
 }
 
-void CServerHandler::quickLoadGame()
+void CServerHandler::quickLoadGame(std::string path)
 {
 	if(!settings["session"]["headless"].Bool())
 	{
@@ -701,7 +701,7 @@ void CServerHandler::quickLoadGame()
 			ENGINE->windows().createAndPushWindow<CLoadingScreen>();
 	}
 	LobbyQuickLoadGame pack;
-	pack.saveFilePath = "Saves/Quicksave";
+	pack.saveFilePath = path;
 	sendLobbyPack(pack);
 }
 
