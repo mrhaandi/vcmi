@@ -708,6 +708,11 @@
 	"vcmi.adventureMap.revisitObject.hover" : "Revisit Object",
 	"vcmi.adventureMap.revisitObject.help" : "{Revisit Object}\n\nIf a hero currently stands on a Map Object, he can revisit the location.",
 
+	"vcmi.adventureMap.quickLoad.hover" : "Quick Load",
+	"vcmi.adventureMap.quickLoad.help" : "{Quick Load}\n\nLoads the game state from a quick save slot.",
+	"vcmi.adventureMap.quickSave.hover" : "Quick Save",
+	"vcmi.adventureMap.quickSave.help" : "{Quick Save}\n\nSaves the current game state to a quick save slot.",
+
 	"vcmi.battleWindow.pressKeyToSkipIntro" : "Press any key to start battle immediately",
 	"vcmi.battleWindow.damageEstimation.melee" : "Attack %CREATURE (%DAMAGE).",
 	"vcmi.battleWindow.damageEstimation.meleeKills" : "Attack %CREATURE (%DAMAGE, %KILLS).",
