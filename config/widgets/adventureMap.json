@@ -101,7 +101,7 @@
 			"type": "adventureMapContainer",
 			"name" : "buttonsContainer",
 			"hideWhen" : "worldViewMode",
-			"area": { "top": 196, "right" : 57, "width" : 64, "height" : 224 },
+			"area": { "top": 196, "right" : 57, "width" : 64, "height" : 192 },
 			"items" : [
 				{
 					"type" : "adventureMapButton",
@@ -239,34 +239,12 @@
 				},
 				{
 					"type": "adventureMapButton",
-					"name": "buttonQuickSave",
-					"image" : "buttons/iam-quicksave.def",
-					"hotkey": "adventureQuickSave",
-					"help" : "core.help.302",
-					"playerColored" : true,
-          "generateFromBaseImage" : "radialMenu/iam-quicksave",
-					"generateSmall" : true,
-					"area": { "top" : 128, "left": 0, "width" : 32, "height" : 32 }
-				},
-				{
-					"type": "adventureMapButton",
-					"name": "buttonQuickLoad",
-					"image" : "buttons/iam-quickload.def",
-					"hotkey": "adventureQuickLoad",
-					"help" : "core.help.302",
-					"playerColored" : true,
-          "generateFromBaseImage" : "radialMenu/iam-quickload",
-					"generateSmall" : true,
-					"area": { "top" : 128, "left": 32, "width" : 32, "height" : 32 }
-				},
-				{
-					"type": "adventureMapButton",
 					"name": "buttonNextHero",
 					"image" : "IAM000.DEF",
 					"help" : "core.help.301",
 					"hotkey": "adventureNextHero",
 					"playerColored" : true,
-					"area": { "top" : 160, "left": 0, "width" : 64, "height" : 32 }
+					"area": { "top" : 128, "left": 0, "width" : 64, "height" : 32 }
 				},
 				{
 					"type": "adventureMapButton",
@@ -275,7 +253,7 @@
 					"hotkey": "adventureEndTurn",
 					"help" : "core.help.302",
 					"playerColored" : true,
-					"area": { "top" : 192, "left": 0, "width" : 64, "height" : 32 }
+					"area": { "top" : 160, "left": 0, "width" : 64, "height" : 32 }
 				}
 			]
 		},
@@ -438,7 +416,7 @@
 					"type": "adventureMapImage",
 					"name" : "backgroundBelowButtons",
 					"image" : "DiBoxBck.pcx",
-					"area": { "top": 224, "bottom" : 3, "right" : 57, "width" : 64 },
+					"area": { "top": 192, "bottom" : 3, "right" : 57, "width" : 64 },
 					"sourceArea": { "left" : 0, "top" : 0, "width" : 256, "height" : 256 }
 				}
 			]
