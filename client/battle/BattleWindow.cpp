@@ -106,7 +106,7 @@ BattleWindow::BattleWindow(BattleInterface & Owner)
 	addShortcut(EShortcut::BATTLE_TOGGLE_HEROES_STATS, [this](){ this->toggleStickyHeroWindowsVisibility();});
 	addShortcut(EShortcut::BATTLE_USE_CREATURE_SPELL, [this](){ this->owner.actionsController->enterCreatureCastingMode(); });
 	addShortcut(EShortcut::GLOBAL_CANCEL, [this](){ this->owner.actionsController->endCastingSpell(); });
-	addShortcut(EShortcut::ADVENTURE_QUICK_LOAD, [this](){ GAME->interface()->proposeQuickLoadingGame(); });
+	addShortcut(EShortcut::ADVENTURE_QUICK_LOAD, [](){ GAME->interface()->proposeQuickLoadingGame(); });
 
 	build(config);
 	
