@@ -1800,6 +1800,25 @@ void CPlayerInterface::proposeLoadingGame()
 	);
 }
 
+void CPlayerInterface::quickSaveGame()
+{
+	std::string path = "Saves/Quicksave";
+	// notify player about saving
+	GAME->server().getGameChat().sendMessageGameplay("Saving game to " + path);
+	GAME->interface()->cb->save(path);
+}
+
+void CPlayerInterface::proposeQuickLoadingGame()
+{
+	auto onYes = []() -> void
+	{
+		std::string path = "Saves/Quicksave";
+		GAME->server().quickLoadGame(path);
+	};
+
+	GAME->interface()->showYesNoDialog(LIBRARY->generaltexth->translate("vcmi.adventureMap.confirmQuickLoadGame"), onYes, nullptr);
+}
+
 bool CPlayerInterface::capturedAllEvents()
 {
 	if(movementController->isHeroMoving())

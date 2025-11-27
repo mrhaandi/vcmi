@@ -17,7 +17,6 @@
 #include "../PlayerLocalState.h"
 #include "../GameEngine.h"
 #include "../GameInstance.h"
-#include "../GameChatHandler.h"
 #include "../gui/Shortcut.h"
 #include "../gui/WindowHandler.h"
 #include "../lobby/CSavingScreen.h"
@@ -379,21 +378,12 @@ void AdventureMapShortcuts::loadGame()
 
 void AdventureMapShortcuts::quickSaveGame()
 {
-	std::string path = "Saves/Quicksave";
-	// notify player about saving
-	GAME->server().getGameChat().sendMessageGameplay("Saving game to " + path);
-	GAME->interface()->cb->save(path);
+	GAME->interface()->quickSaveGame();
 }
 
 void AdventureMapShortcuts::quickLoadGame()
 {
-	auto onYes = []() -> void
-	{
-		std::string path = "Saves/Quicksave";
-		GAME->server().quickLoadGame(path);
-	};
-
-	GAME->interface()->showYesNoDialog(LIBRARY->generaltexth->translate("vcmi.adventureMap.confirmQuickLoadGame"), onYes, nullptr);
+	GAME->interface()->proposeQuickLoadingGame();
 }
 
 void AdventureMapShortcuts::digGrail()
