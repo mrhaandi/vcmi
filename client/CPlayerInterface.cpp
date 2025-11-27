@@ -1810,12 +1810,20 @@ void CPlayerInterface::quickSaveGame()
 
 void CPlayerInterface::proposeQuickLoadingGame()
 {
-	auto onYes = []() -> void
+	std::string path = "Saves/Quicksave";
+
+	using namespace boost::filesystem;
+
+	auto pathToFile = VCMIDirs::get().userDataPath() / (path + ".vsgm1");
+	if (!exists(pathToFile))
 	{
-		std::string path = "Saves/Quicksave";
+		logGlobal->warn("No quicksave file found at %s", pathToFile.string());
+		return;
+	}
+	auto onYes = [path]() -> void
+	{
 		GAME->server().quickLoadGame(path);
 	};
-
 	GAME->interface()->showYesNoDialog(LIBRARY->generaltexth->translate("vcmi.adventureMap.confirmQuickLoadGame"), onYes, nullptr);
 }
 
