@@ -116,6 +116,8 @@
 
 #include "../lib/texts/TextOperations.h"
 
+#include "../lib/filesystem/Filesystem.h"
+
 #include <boost/lexical_cast.hpp>
 
 // The macro below is used to mark functions that are called by client when game state changes.
@@ -1812,12 +1814,9 @@ void CPlayerInterface::proposeQuickLoadingGame()
 {
 	std::string path = "Saves/Quicksave";
 
-	using namespace boost::filesystem;
-
-	auto pathToFile = VCMIDirs::get().userDataPath() / (path + ".vsgm1");
-	if (!exists(pathToFile))
-	{
-		logGlobal->warn("No quicksave file found at %s", pathToFile.string());
+	if(!CResourceHandler::get("local")->existsResource(ResourcePath(path, EResType::SAVEGAME)))
+  {
+		logGlobal->warn("No quicksave file found at %s", path);
 		return;
 	}
 	auto onYes = [path]() -> void
