@@ -241,6 +241,7 @@ std::unique_ptr<BattleInfo> BattleInfo::setupBattle(IGameInfoCallback *cb, const
 
 		try
 		{
+			tilesToBlock = 2;
 			while(tilesToBlock > 0)
 			{
 				RangeGenerator obidgen(0, LIBRARY->obstacleHandler->size() - 1, ourRand);
@@ -278,6 +279,7 @@ std::unique_ptr<BattleInfo> BattleInfo::setupBattle(IGameInfoCallback *cb, const
 				auto obstPtr = std::make_shared<CObstacleInstance>();
 				obstPtr->ID = obid;
 				obstPtr->pos = posgenerator.getSuchNumber(validPosition);
+				logGlobal->debug("Placing obstacle ID %d at position %d (x=%d, y=%d)", obid, obstPtr->pos.toInt(), obstPtr->pos.getX(), obstPtr->pos.getY());
 				obstPtr->uniqueID = static_cast<si32>(currentBattle->obstacles.size());
 				currentBattle->obstacles.push_back(obstPtr);
 

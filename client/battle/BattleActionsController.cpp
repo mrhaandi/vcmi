@@ -876,12 +876,10 @@ PossiblePlayerBattleAction BattleActionsController::selectAction(const BattleHex
 
 void BattleActionsController::onHexHovered(const BattleHex & hoveredHex)
 {
-	if (owner.openingPlaying())
-	{
 		currentConsoleMsg = LIBRARY->generaltexth->translate("vcmi.battleWindow.pressKeyToSkipIntro");
-		ENGINE->statusbar()->write(currentConsoleMsg);
+		ENGINE->statusbar()->write("Hovered hex: " + std::to_string(hoveredHex.getX()) + ", " + std::to_string(hoveredHex.getY()));
+		//ENGINE->statusbar()->write(currentConsoleMsg);
 		return;
-	}
 
 	if (owner.stacksController->getActiveStack() == nullptr)
 		return;
