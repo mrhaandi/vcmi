@@ -94,7 +94,7 @@ std::shared_ptr<ObstacleInfo> ObstacleHandler::loadFromJson(const std::string & 
 	assert(identifier.find(':') == std::string::npos);
 
 	auto info = std::make_shared<ObstacleInfo>(Obstacle(index), identifier);
-	
+	logGlobal->debug("Loading obstacle %s (id %d)", identifier.c_str(), index);
 	info->modScope = scope;
 	info->animation = AnimationPath::fromJson(json["animation"]);
 	info->width = json["width"].Integer();

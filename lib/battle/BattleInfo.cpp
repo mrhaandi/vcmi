@@ -200,7 +200,8 @@ std::unique_ptr<BattleInfo> BattleInfo::setupBattle(IGameInfoCallback *cb, const
  	{
 		RandGen r{};
 		auto ourRand = [&](){ return r.rand(); };
-		r.srand(tile);
+		//r.srand(tile);
+		r.srand(1);
 		r.rand(1,8); //battle sound ID to play... can't do anything with it here
 		int tilesToBlock = r.rand(5,12);
 
@@ -217,7 +218,8 @@ std::unique_ptr<BattleInfo> BattleInfo::setupBattle(IGameInfoCallback *cb, const
 			return info && !info->isAbsoluteObstacle && info->isAppropriate(currentBattle->terrainType, battlefieldType);
 		};
 
-		if(r.rand(1,100) <= 40) //put cliff-like obstacle
+		//if(r.rand(1,100) <= 40) //put cliff-like obstacle
+		if (false)
 		{
 			try
 			{
@@ -241,12 +243,13 @@ std::unique_ptr<BattleInfo> BattleInfo::setupBattle(IGameInfoCallback *cb, const
 
 		try
 		{
-			tilesToBlock = 2;
+			tilesToBlock = 1;
 			while(tilesToBlock > 0)
 			{
 				RangeGenerator obidgen(0, LIBRARY->obstacleHandler->size() - 1, ourRand);
 				auto tileAccessibility = currentBattle->getAccessibility();
-				const int obid = obidgen.getSuchNumber(appropriateUsualObstacle);
+				//const int obid = obidgen.getSuchNumber(appropriateUsualObstacle);
+				const int obid = 96;
 				const ObstacleInfo &obi = *Obstacle(obid).getInfo();
 
 				auto validPosition = [&](const BattleHex & pos) -> bool

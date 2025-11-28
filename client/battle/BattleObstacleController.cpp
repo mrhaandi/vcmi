@@ -199,8 +199,9 @@ Point BattleObstacleController::getObstaclePosition(std::shared_ptr<IImage> imag
 	int offset = obstacle.getAnimationYOffset(image->height());
 
 	Rect r = owner.fieldController->hexPositionLocal(obstacle.pos);
+	//r.y -= image->height();
+	//return r.bottomLeft();
 	r.y += 42 - image->height() + offset;
-
 	return r.topLeft();
 }
 
