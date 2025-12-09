@@ -35,7 +35,6 @@ public:
 		ONLY_MINE, ONLY_ENEMY, MINE_AND_ENEMY
 	};
 
-	bool duringBattle() const;
 	BattleSide battleGetMySide() const;
 	const IBonusBearer * getBonusBearer() const override;
 

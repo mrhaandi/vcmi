@@ -1673,7 +1673,7 @@ AttackableTiles CBattleInfoCallback::getPotentiallyShootableHexes(const battle::
 
 battle::Units CBattleInfoCallback::getAttackedBattleUnits(
 	const battle::Unit * attacker,
-	const  battle::Unit * defender,
+	const battle::Unit * defender,
 	BattleHex destinationTile,
 	bool rangedAttack,
 	BattleHex attackerPos,

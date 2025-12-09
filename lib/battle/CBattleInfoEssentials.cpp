@@ -21,11 +21,6 @@
 
 VCMI_LIB_NAMESPACE_BEGIN
 
-bool CBattleInfoEssentials::duringBattle() const
-{
-	return getBattle() != nullptr;
-}
-
 TerrainId CBattleInfoEssentials::battleTerrainType() const
 {
 	RETURN_IF_NOT_BATTLE(TerrainId());

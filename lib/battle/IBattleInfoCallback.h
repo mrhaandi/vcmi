@@ -15,7 +15,7 @@
 
 #include <vcmi/Entity.h>
 
-#define RETURN_IF_NOT_BATTLE(...) do { if(!duringBattle()) {logGlobal->error("%s called when no battle!", __FUNCTION__); return __VA_ARGS__; } } while (false)
+#define RETURN_IF_NOT_BATTLE(...) do { if(getBattle() == nullptr) {logGlobal->error("%s called when no battle!", __FUNCTION__); return __VA_ARGS__; } } while (false)
 
 VCMI_LIB_NAMESPACE_BEGIN
 
