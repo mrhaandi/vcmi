@@ -882,7 +882,8 @@
 				"aiValue" : 11000,
 				"rmg" : {
 					"value"		: 10000,
-					"rarity"	: 100
+					"rarity"	: 100,
+          "zoneLimit" : 2
 				},
 
 				"visitMode" : "once",
