@@ -62,8 +62,8 @@ std::string CBonusTypeHandler::bonusToString(const std::shared_ptr<Bonus> & bonu
 		return "";
 
 	suffix = suffix.empty() ? "" : "." + suffix;
-	std::string textID = bt.getDescriptionTextID() + suffix;
-	std::string text = LIBRARY->generaltexth->translate(textID);
+	std::string textID = bt.getDescriptionTextID();
+	std::string text = LIBRARY->generaltexth->translate(textID + suffix);
 
 	auto subtype = bonus->subtype.getNum();
 	if (bt.subtypeDescriptions.count(subtype))
