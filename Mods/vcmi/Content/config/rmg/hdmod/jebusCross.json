@@ -11,7 +11,7 @@
       }
     },
     "bannedSpells": [
-        "townPortal", "protectAir", "protectFire", "protectWater", "protectEarth"
+        "townPortal", "protectAir", "protectFire", "protectWater", "protectEarth", "magicMirror"
     ],
     "bannedSkills": [
         "diplomacy",
@@ -26,7 +26,7 @@
 				"type" : "playerStart", "size" : 30, "owner" : 1,
 				"playerTowns" : { "castles" : 1 },
 				"neutralTowns" : { "towns" : 1 },
-        "townsAreSameType" : true,
+        "townsAreSameType" : false,
 				"monsters" : "weak",
 				"mines" : {"wood" : 2, "ore" : 2, "gems" : 1, "crystal" : 1, "sulfur" : 1, "mercury" : 1, "gold" : 2},
 				"customObjects" : {
@@ -94,10 +94,10 @@
 		},
 		"connections" :
 		[
-			{ "a" : "1", "b" : "5", "guard" : 55000 },
-			{ "a" : "2", "b" : "5", "guard" : 55000 },
-			{ "a" : "3", "b" : "5", "guard" : 55000 },
-			{ "a" : "4", "b" : "5", "guard" : 55000 }
+			{ "a" : "1", "b" : "5", "guard" : 70000 },
+			{ "a" : "2", "b" : "5", "guard" : 70000 },
+			{ "a" : "3", "b" : "5", "guard" : 70000 },
+			{ "a" : "4", "b" : "5", "guard" : 70000 }
 		]
 	}
 }
