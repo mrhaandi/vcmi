@@ -843,6 +843,18 @@ bool JsonUtils::parseBonus(const JsonNode &ability, Bonus *b, const TextIdentifi
 	value = &ability["propagationUpdater"];
 	if(!value->isNull())
 		b->propagationUpdater = parseUpdater(*value);
+	value = &ability["propagationBonus"];
+	if(!value->isNull())
+	{
+		//std::string nestedDescId = descriptionID.get() + ".propagationBonus";
+		b->propagationBonus = parseBonus(*value);				
+		// prevent nested propagation
+		if (b->propagationBonus->propagator)
+		{
+			logMod->warn("propagationBonus should not have a propagator, ignoring");
+			b->propagationBonus->propagator = nullptr;
+		}
+	}
 	return true;
 }
 

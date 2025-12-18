@@ -92,20 +92,22 @@
 			{
 				"type" : "TWO_HEX_ATTACK_BREATH"
 			},
-			"fearful" :
-			{
-				"type" : "FEARFUL",
-				"val" : 10,
-				"propagator": "BATTLE_WIDE",
-				"propagationUpdater" : "BONUS_OWNER_UPDATER",
-				"description" : "PLACEHOLDER",
-				"limiters" : [ 
-					"OPPOSITE_SIDE", 
-					{
-						"type" : "HAS_ANOTHER_BONUS_LIMITER",
-						"bonusType" : "LIVING"
-					}
-				]
+
+			"fearful" : {
+					"type" : "NONE",
+					"propagator": "BATTLE_WIDE",
+					"propagationUpdater" : "BONUS_OWNER_UPDATER",
+					"propagationBonus" : {
+							"type" : "FEARFUL",
+							"valueType" : "ADDITIVE_VALUE",
+							"description" : "@creatures.core.azureDragon.bonus.fear.received",
+							"val" : 10
+					},
+					"description" : "@creatures.core.azureDragon.bonus.fearful",
+					"limiters" : [ 
+							"OPPOSITE_SIDE", 
+							{ "type" : "HAS_ANOTHER_BONUS_LIMITER", "bonusType" : "LIVING" }
+					]
 			},
 			"fearless" :
 			{

@@ -316,6 +316,9 @@
 		"propagationUpdater" : {
 			"$ref" : "#/definitions/updater"
 		},
+		"propagationBonus" : {
+			"$ref" : "#/definitions/bonusInstance"
+		},
 		"limiters" : {
 			"$ref" : "#/definitions/nestedLimiter",
 			"description" : "limiter"

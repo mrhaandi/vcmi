@@ -362,9 +362,19 @@ void CBonusSystemNode::propagateBonus(const std::shared_ptr<Bonus> & b, const CB
 {
 	if(b->propagator->shouldBeAttached(this))
 	{
-		auto propagated = b->propagationUpdater
-			? source.getUpdatedBonus(b, b->propagationUpdater)
-			: b;
+		std::shared_ptr<Bonus> propagated;
+		if (b->propagationBonus)
+		{
+			propagated = std::make_shared<Bonus>(*b->propagationBonus);
+			propagated->source = b->source;
+			propagated->sid = b->sid;
+			propagated->propagationUpdater = b->propagationUpdater; // to ensure correct unpropagation
+		}
+		else
+			propagated = b;
+		propagated = b->propagationUpdater
+			? source.getUpdatedBonus(propagated, b->propagationUpdater)
+			: propagated;
 		bonuses.push_back(propagated);
 		logBonus->trace("#$# %s #propagated to# %s", propagated->Description(nullptr), nodeName());
 		invalidateChildrenNodes(globalCounter);

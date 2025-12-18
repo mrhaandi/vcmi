@@ -126,6 +126,7 @@ struct DLL_LINKAGE Bonus : public std::enable_shared_from_this<Bonus>, public Se
 	TPropagatorPtr propagator;
 	TUpdaterPtr updater;
 	TUpdaterPtr propagationUpdater;
+	std::shared_ptr<Bonus> propagationBonus;
 
 	ImagePath customIconPath;
 	MetaString description;
@@ -161,6 +162,7 @@ struct DLL_LINKAGE Bonus : public std::enable_shared_from_this<Bonus>, public Se
 		h & propagator;
 		h & updater;
 		h & propagationUpdater;
+		h & propagationBonus;
 		h & targetSourceType;
 	}
 
