@@ -918,6 +918,8 @@ void CStackWindow::initBonusesList()
 		// Try to find the bonus in the group that represents the final effect in the best way.
 		std::sort(group.begin(), group.end(), bonusSortingPredicate);
 
+		auto b = group[0];
+
 		BonusList groupIndepMin = group;
 		BonusList groupIndepMax = group;
 		BonusList groupNoMinMax = group;

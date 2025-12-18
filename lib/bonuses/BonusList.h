@@ -53,6 +53,8 @@ public:
 
 	// BonusList functions
 	void stackBonuses();
+	// returns (total, independent_min, independent_max) values of the bonuses
+	const std::tuple<std::optional<int>, std::optional<int>, std::optional<int>> totalRange(int baseValue = 0) const;
 	int totalValue(int baseValue = 0) const;
 	void getBonuses(BonusList &out, const CSelector &selector) const;
 	void getAllBonuses(BonusList &out) const;

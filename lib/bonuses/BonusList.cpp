@@ -53,10 +53,10 @@ void BonusList::stackBonuses()
 	}
 }
 
-int BonusList::totalValue(int baseValue) const
+const std::tuple<std::optional<int>, std::optional<int>, std::optional<int>> BonusList::totalRange(int baseValue) const
 {
-	if (bonuses.empty())
-		return baseValue;
+	if(bonuses.empty())
+		return {std::nullopt, std::nullopt, std::nullopt};
 
 	struct BonusCollection
 	{
@@ -142,17 +142,23 @@ int BonusList::totalValue(int baseValue) const
 		accumulated.indepMax = accumulated.indepMin;
 
 	const int notIndepBonuses = bonuses.size() - indexMaxCount - indexMinCount;
+	return {
+		notIndepBonuses ? std::optional<int>{valFirst} : std::nullopt,
+		indexMinCount ? std::optional<int>{accumulated.indepMin} : std::nullopt,
+		indexMaxCount ? std::optional<int>{accumulated.indepMax} : std::nullopt
+	};
+}
 
-	if(notIndepBonuses)
-		return std::clamp(valFirst, accumulated.indepMax, accumulated.indepMin);
-
-	if (indexMinCount)
-		return accumulated.indepMin;
-
-	if (indexMaxCount)
-		return accumulated.indepMax;
-
-	return 0;
+int BonusList::totalValue(int baseValue) const
+{
+	auto [total, min, max] = totalRange(baseValue);
+	if(total)
+		return std::clamp(*total, min.value_or(std::numeric_limits<int>::max()), max.value_or(std::numeric_limits<int>::min()));
+	if(min)
+		return *min;
+	if(max)
+		return *max;
+	return baseValue;
 }
 
 std::shared_ptr<Bonus> BonusList::getFirst(const CSelector &select)
