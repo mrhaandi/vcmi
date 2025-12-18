@@ -48,7 +48,7 @@ public:
 	CBonusTypeHandler();
 	virtual ~CBonusTypeHandler();
 
-	std::string bonusToString(const std::shared_ptr<Bonus> & bonus, const IBonusBearer * bearer) const override;
+	std::string bonusToString(const std::shared_ptr<Bonus> & bonus, const IBonusBearer * bearer, std::string suffix = "") const override;
 	ImagePath bonusToGraphics(const std::shared_ptr<Bonus> & bonus) const override;
 
 	std::vector<JsonNode> loadLegacyData() override;

@@ -54,25 +54,26 @@ CBonusTypeHandler::CBonusTypeHandler()
 
 CBonusTypeHandler::~CBonusTypeHandler() = default;
 
-std::string CBonusTypeHandler::bonusToString(const std::shared_ptr<Bonus> & bonus, const IBonusBearer * bearer) const
+std::string CBonusTypeHandler::bonusToString(const std::shared_ptr<Bonus> & bonus, const IBonusBearer * bearer, std::string suffix) const
 {
 	const CBonusType & bt = *bonusTypes.at(vstd::to_underlying(bonus->type));
 	int bonusValue = bearer->valOfBonuses(bonus->type, bonus->subtype);
 	if(bt.hidden)
 		return "";
 
-	std::string textID = bt.getDescriptionTextID();
+	suffix = suffix.empty() ? "" : "." + suffix;
+	std::string textID = bt.getDescriptionTextID() + suffix;
 	std::string text = LIBRARY->generaltexth->translate(textID);
 
 	auto subtype = bonus->subtype.getNum();
 	if (bt.subtypeDescriptions.count(subtype))
 	{
-		std::string fullTextID = textID + '.' + bt.subtypeDescriptions.at(subtype);
+		std::string fullTextID = textID + '.' + bt.subtypeDescriptions.at(subtype) + suffix;
 		text = LIBRARY->generaltexth->translate(fullTextID);
 	}
 	else if (bt.valueDescriptions.count(bonusValue))
 	{
-		std::string fullTextID = textID + '.' + bt.valueDescriptions.at(bonusValue);
+		std::string fullTextID = textID + '.' + bt.valueDescriptions.at(bonusValue) + suffix;
 		text = LIBRARY->generaltexth->translate(fullTextID);
 	}
 

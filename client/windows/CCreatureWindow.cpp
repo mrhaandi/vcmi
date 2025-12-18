@@ -861,12 +861,12 @@ void CStackWindow::initBonusesList()
     ? static_cast<const IBonusBearer*>(info->stack)  // Use CStack for war machines
     : static_cast<const IBonusBearer*>(info->stackNode);  // Use CStackInstance for regular units
 
-	auto bonusToString = [bonusSource](const std::shared_ptr<Bonus> & bonus) -> std::string
+	auto bonusToString = [bonusSource](const std::shared_ptr<Bonus> & bonus, std::string suffix = "") -> std::string
 	{
 		if(!bonus->description.empty())
 			return bonus->description.toString();
 		else
-			return LIBRARY->getBth()->bonusToString(bonus, bonusSource);
+			return LIBRARY->getBth()->bonusToString(bonus, bonusSource, suffix);
 	};
 
 	BonusList receivedBonuses = *bonusSource->getBonuses(CSelector(Bonus::Permanent));
@@ -907,11 +907,11 @@ void CStackWindow::initBonusesList()
 		std::copy_if(receivedBonuses.begin(), receivedBonuses.end(), std::back_inserter(groupedBonuses.back()), sameBonusPredicate);
 		receivedBonuses.remove_if(Selector::typeSubtype(currentBonus->type, currentBonus->subtype));
 		// FIXME: potential edge case: unit has ability that is propagated away (and needs to be displayed), but also receives same bonus from someplace else
-		abilities.remove_if(Selector::typeSubtype(currentBonus->type, currentBonus->subtype));
+		//abilities.remove_if(Selector::typeSubtype(currentBonus->type, currentBonus->subtype));
 	}
 
 	// Add any remaining abilities of this unit that don't affect it at the moment, such as abilities that are propagated away, e.g. to other side in combat
-	BonusList visibleBonuses = abilities;
+	BonusList visibleBonuses;
 
 	for (auto & group : groupedBonuses)
 	{
@@ -950,9 +950,20 @@ void CStackWindow::initBonusesList()
 	std::sort(visibleBonuses.begin(), visibleBonuses.end(), bonusSortingPredicate);
 
 	BonusInfo bonusInfo;
+	for(auto b : abilities)
+	{
+		bonusInfo.description = bonusToString(b, "propagator");
+		//FIXME: we possibly use fakeNode, which does not have the correct bonus value
+		bonusInfo.imagePath = info->stackNode->bonusToGraphics(b);
+		bonusInfo.bonusSource = b->source;
+
+		//if it's possible to give any description or image for this kind of bonus
+		if(!bonusInfo.description.empty() && !b->hidden)
+			activeBonuses.push_back(bonusInfo);
+	}
 	for(auto b : visibleBonuses)
 	{
-		bonusInfo.description = bonusToString(b);
+		bonusInfo.description = bonusToString(b, "propagated");
 		//FIXME: we possibly use fakeNode, which does not have the correct bonus value
 		bonusInfo.imagePath = info->stackNode->bonusToGraphics(b);
 		bonusInfo.bonusSource = b->source;
