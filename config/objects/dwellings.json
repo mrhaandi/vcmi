@@ -443,7 +443,12 @@
 			},
 			"frozenCliffs": {
 				"index": 62,
-				"creatures": [["azureDragon"]]
+				"creatures": [["azureDragon"]],
+				"rmg" : {
+					"value" : 5000,
+					"rarity" : 200,
+					"zoneLimit" : 3
+				}
 			},
 			"crystalCavern": {
 				"index": 63,
@@ -451,7 +456,12 @@
 			},
 			"magicForest": {
 				"index": 64,
-				"creatures": [["fairieDragon"]]
+				"creatures": [["fairieDragon"]],
+				"rmg" : {
+					"value" : 5000,
+					"rarity" : 200,
+					"zoneLimit" : 3
+				}
 			},
 			"sulfurousLair": {
 				"index": 65,

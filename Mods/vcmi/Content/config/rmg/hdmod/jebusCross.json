@@ -85,19 +85,19 @@
 				"monsters" : "strong",
 				"mines" : {"gold" : 4}
 				"treasure" : [
-								{"min" : 35000, "max": 55000, "density" : 3},
-								{"min" : 25000, "max": 35000, "density" : 10},
-								{"min" : 10000, "max": 25000, "density" : 10}
+								{"min" : 35000, "max": 55000, "density" : 4},
+								{"min" : 25000, "max": 35000, "density" : 8},
+								{"min" : 10000, "max": 25000, "density" : 4}
 							],
         "customObjectsLikeZone" : 1
 			}
 		},
 		"connections" :
 		[
-			{ "a" : "1", "b" : "5", "guard" : 70000 },
-			{ "a" : "2", "b" : "5", "guard" : 70000 },
-			{ "a" : "3", "b" : "5", "guard" : 70000 },
-			{ "a" : "4", "b" : "5", "guard" : 70000 }
+			{ "a" : "1", "b" : "5", "guard" : 100000 },
+			{ "a" : "2", "b" : "5", "guard" : 100000 },
+			{ "a" : "3", "b" : "5", "guard" : 100000 },
+			{ "a" : "4", "b" : "5", "guard" : 100000 }
 		]
 	}
 }
